@@ -212,7 +212,7 @@ export default {
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al agregar tarea:', error.response.data);
+        console.error('Error al agregar empleado:', error.response.data);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -247,7 +247,7 @@ export default {
         //Recargar visual
         this.fetchData();
       } catch (error) {
-        console.error('Error al modificar la tarea:', error.response.data);
+        console.error('Error al modificar la empleado:', error.response.data);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -263,13 +263,13 @@ export default {
       try {
         console.log(employee);
         const response = await this.$axios.delete(`/employee/${employee.id}`);
-        this.employees = this.employees.filter(e => e.id !== employee.id); // esto elimina la tarea eliminada de la lista
+        this.employees = this.employees.filter(e => e.id !== employee.id); // esto elimina la empleado eliminada de la lista
         //preparar mensaje
         this.message = response.data.message;
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al eliminar tarea:', error.response.data);
+        console.error('Error al eliminar empleado:', error.response.data);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -305,7 +305,7 @@ export default {
         const response = await this.$axios.get('/employee');
         this.employees = response.data;
       } catch (error) {
-        console.error('Error al obtener tareas:', error.response.data);
+        console.error('Error al obtener empleados:', error.response.data);
       } finally {
         this.toggleLoading();
       }

@@ -12,7 +12,8 @@
           <v-btn to="/course">Cursos</v-btn>
           <v-btn to="/edition">Ediciones</v-btn>
         </div>
-        <v-toolbar-title>Nombre de tu Sitio</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-title>SGCPT</v-toolbar-title>
       </v-app-bar>
 
       <!--Menu lateral-->
