@@ -49,6 +49,7 @@
                 <!-- Fin del Dialog -->
               </v-toolbar>
             </template>
+
             <!-- Agregamos la columna de acciones -->
             <template v-slot:item.actions="{ item }">
               <v-btn class="edit" icon @click="openUpdateEdition(item)" flat>
@@ -57,7 +58,11 @@
               <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
                 <v-icon color="red darken-1">mdi-delete</v-icon>
               </v-btn>
+              <v-btn class="info" icon @click="openDialogDetail(item)" flat>
+                <v-icon color="yellow darken-1">mdi-information-variant-circle-outline</v-icon>
+              </v-btn>
             </template>
+
             <!-- Fin de la columna de acciones -->
           </v-data-table>
         </v-col>
@@ -78,22 +83,28 @@
         </v-card>
       </v-dialog>
 
+      <!--Mensaje que notifica la acción-->
       <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
         {{ message }}
       </v-snackbar>
+
+      <EditionDetail :edition ="edition" ref="detail_dialog" />
+
     </v-container>
+    <!--Fin del contenedor principal-->>
   </v-app>
 </template>
 
 <script>
 import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
-import { tSThisType } from '@babel/types';
+import EditionDetail from '@/components/EditionDetail.vue';
 
 export default {
-  code_id: 'EditionView',
+  name: 'EditionView',
   components: {
     LoadingPage,
+    EditionDetail,
   },
   data() {
     return {
@@ -151,6 +162,8 @@ export default {
         this.updateEdition();
       }
     },
+
+    //Abrir el dialog del formulario en modo agregar
     openAddEdition() {
       //Modificar la variable isAdd para que se sepa que está agregando
       this.isAdd = true;
@@ -158,7 +171,9 @@ export default {
       this.dialogTitle = "Agregando Edición";
       this.selectedStudents = new Array();
     },
-    async openUpdateEdition(edition) {
+
+    //Abrir el dialog del formulario en modo actualizar
+    openUpdateEdition(edition) {
       try {
         //Modificar la variable isAdd para que se sepa que está modificando
         this.isAdd = false;
@@ -184,13 +199,14 @@ export default {
         console.error("Error al cargar el dialog", error.response.data)
       }
     },
+
+    //Abrir el mensaje de confirmación de eliminar
     openDialogDelete(edition) {
       this.dialog_delete = true;
       this.edition = edition;
     },
-    cerrarDialogEliminar() {
-      this.dialog_delete = false;
-    },
+
+    //Cerrar el formulario de agregar y modificar
     cerrarFormulario() {
       //Datos del formulario
       this.codeCourseField = null;
@@ -296,6 +312,14 @@ export default {
         }
       }
     },
+
+    //Abrir el diaglo de detalles
+    openDialogDetail(edition) {
+      //Se llama a las referencias del componente y se activa sus metodos
+      this.$refs.detail_dialog.abrir();
+      this.edition = edition;
+    },
+
     //Formatear la fecha enviada al server
     dateFormat(date) {
       const formattedDate = date.toLocaleDateString('en-GB', {
@@ -375,5 +399,10 @@ export default {
 
 .add-button {
   font-size: 1.2rem;
+}
+
+.dialog-bottom-transition-enter-active,
+.dialog-bottom-transition-leave-active {
+  transition: transform .2s ease-in-out;
 }
 </style>
