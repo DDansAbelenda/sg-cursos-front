@@ -33,8 +33,8 @@
                         <v-text-field v-model="nationalityField" label="Nacionalidad" required></v-text-field>
                         <v-text-field v-model="salaryField" label="Salario" required></v-text-field>
                         <v-select v-model="selectedSex" :items="sexo" label="Selecciona una opción"></v-select>
-                        <v-checkbox :disabled="isProfesor" v-model="isQualified" label="¿Está calificado para dar clases?"
-                          @click="toggleCheckbox"></v-checkbox>
+                        <v-checkbox :disabled="isProfessor" v-model="isQualified"
+                          label="¿Está calificado para dar clases?" @click="toggleCheckbox"></v-checkbox>
                         <v-date-picker v-model="dateSelected" title="Fecha de Nacimiento" label="Fecha de Nacimiento"
                           required></v-date-picker>
                         <!-- Agrega otros campos según la estructura de tu migración -->
@@ -53,13 +53,37 @@
               <v-btn class="edit" icon @click="openUpdateEmployee(item)" flat>
                 <v-icon color="blue darken-1">mdi-pencil</v-icon>
               </v-btn>
-              <v-btn class="delete" icon @click="deleteEmployee(item)" flat>
+              <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
                 <v-icon color="red darken-1">mdi-delete</v-icon>
               </v-btn>
+            </template>
+            <!-- Definimos estructura de los valores de ¿Está calificado? -->
+            <template v-slot:item.is_qualified="{ item }">
+              <div class="text-end">
+                <v-chip :color="item.is_qualified ? 'green' : 'red'" :text="item.is_qualified ? 'Sí' : 'No'"
+                  class="text-uppercase" label size="small"></v-chip>
+              </div>
             </template>
           </v-data-table>
         </v-col>
       </v-row>
+
+      <!--Dialog que pregunta si desea eliminar o no-->
+      <v-dialog v-model="dialog_delete" max-width="40rem" persistent>
+        <!-- Formulario para agregar empleado -->
+        <v-card>
+          <v-card-title>Aviso</v-card-title>
+          <v-card-text>
+            ¿Está seguro de que desea eliminar el empleado?
+          </v-card-text>
+          <v-card-actions>
+            <v-btn @click="deleteEmployee">Aceptar</v-btn>
+            <v-btn @click="cerrarDialogEliminar">Cancelar</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+
+      <!--Notificación que se muestra ante una acción-->
       <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
         {{ message }}
       </v-snackbar>
@@ -84,10 +108,12 @@ export default {
       snackbar: false,
       message: '',
       color: '',
-      timeout: 3000,
+      timeout: 2000,
       //Variable del dialog
       dialog: false,
       dialogTitle: '',
+      //Dialog delete
+      dialog_delete: false,
       //Datos del formulario   
       nameField: null,
       lastNameField: null,
@@ -118,8 +144,8 @@ export default {
       //Controlando si está agregando o modificando
       isAdd: true,
       //Variable necesaria para controlar si el checbox se habilita o no
-      isProfesor: false,
-      //Empleado, variable necesaria cuando se va a modificar
+      isProfessor: false,
+      //Empleado, variable necesaria cuando se va a modificar y eliminar
       employee: null,
     };
   },
@@ -142,7 +168,7 @@ export default {
       this.dialog = true;
       this.dialogTitle = "Agregando Empleado";
       //Habilitar checkbox
-      this.isProfesor = true;
+      this.isProfessor = false;
     },
     async openUpdateEmployee(employee) {
       try {
@@ -156,14 +182,14 @@ export default {
         this.nifField = employee.nif;
         this.nationalityField = employee.nationality;
         this.salaryField = employee.salary;
-        this.selectedSex = this.selectedSex == 'M' ? 'Masculino' : 'Femenino';
+        this.selectedSex = employee.sex;
         this.isQualified = employee.is_qualified;
         // Parse and format the date using moment.js, esto es necesario porque date-picker solo
         // entiende el tipo Date() de js
         this.dateSelected = moment(employee.date_birth, 'DD/MM/YYYY').toDate();
-        //Consultar si es profesor en alguna edición
-        const response = await this.$axios.get(`/isprofesor/${employee.id}`);
-        this.isProfesor = response.data.isProfesor;
+        //Consultar si es professor en alguna edición
+        const response = await this.$axios.get(`/isprofessor/${employee.id}`);
+        this.isProfessor = response.data.isProfessor;
         this.employee = employee;
         //Activar el dialog
         this.dialog = true;
@@ -171,7 +197,13 @@ export default {
       } catch (error) {
         console.error("Error al cargar el dialog", error.response.data)
       }
-
+    },
+    openDialogDelete(employee) {
+      this.dialog_delete = true;
+      this.employee = employee;
+    },
+    cerrarDialogEliminar() {
+      this.dialog_delete = false;
     },
     cerrarFormulario() {
       //Datos del formulario
@@ -200,9 +232,9 @@ export default {
           nif: this.nifField,
           nationality: this.nationalityField,
           salary: this.salaryField,
-          sex: this.selectedSex == 'Masculino' ? 'M' : 'F',
+          sex: this.selectedSex,
           is_qualified: this.isQualified,
-          date_birth: this.dateFormat(this.dateSelected),
+          date_birth: this.dateSelected,
         }
         const response = await this.$axios.post('/employee', employee); // El segundo parámetro es un JSON que es el request
         this.employees.push(response.data.employee);
@@ -234,20 +266,24 @@ export default {
           nif: this.nifField,
           nationality: this.nationalityField,
           salary: this.salaryField,
-          sex: this.selectedSex == 'Masculino' ? 'M' : 'F',
+          sex: this.selectedSex,
           is_qualified: this.isQualified,
-          date_birth: this.dateFormat(this.dateSelected),
+          date_birth: this.dateSelected,
         }
         const response = await this.$axios.put(`/employee/${this.employee.id}`, employee_json);
+        //Poner el elemento devuelto en la lista desde el server en la lista
+        let employee_response = response.data.employee;
+        let employeeIndex = this.employees.findIndex(e => e.id == employee_response.id);
+        this.employees[employeeIndex] = employee_response;
+        //Cerrar el formulario    
         this.cerrarFormulario();
         //preparar mensaje
         this.message = response.data.message;
         this.color = 'success';
         this.snackbar = true;
-        //Recargar visual
-        this.fetchData();
+
       } catch (error) {
-        console.error('Error al modificar la empleado:', error.response.data);
+        console.error('Error al modificar la empleado:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -259,11 +295,16 @@ export default {
     },
 
     //Eliminando un empleado
-    async deleteEmployee(employee) {
+    async deleteEmployee() {
       try {
-        console.log(employee);
+        //Tomo el empleado enviado desde la tabla que se guarda en la variable global employee
+        let employee = this.employee;
+        //Ejecuto la eliminación en el servidor
         const response = await this.$axios.delete(`/employee/${employee.id}`);
+        //Elimino de la tabla
         this.employees = this.employees.filter(e => e.id !== employee.id); // esto elimina la empleado eliminada de la lista
+        //Cierro el dialog
+        this.dialog_delete = false;
         //preparar mensaje
         this.message = response.data.message;
         this.color = 'success';
@@ -285,15 +326,6 @@ export default {
       this.isQualified = !this.isQualified;
     },
 
-    //Formatear una fecha
-    dateFormat(date) {
-      const formattedDate = date.toLocaleDateString('en-GB', {
-        day: '2-digit',
-        month: '2-digit', // Cambiado a '2-digit' para obtener el mes como dos dígitos
-        year: 'numeric'
-      }).split('/').join('-');
-      return formattedDate;
-    },
     //Activar y desactiva el loading
     toggleLoading() {
       this.loading = !this.loading;

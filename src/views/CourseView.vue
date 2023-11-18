@@ -47,13 +47,28 @@
                             <v-btn class="edit" icon @click="openUpdateCourse(item)" flat>
                                 <v-icon color="blue darken-1">mdi-pencil</v-icon>
                             </v-btn>
-                            <v-btn class="delete" icon @click="deleteCourse(item)" flat>
+                            <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
                                 <v-icon color="red darken-1">mdi-delete</v-icon>
                             </v-btn>
                         </template>
                     </v-data-table>
                 </v-col>
             </v-row>
+            <!--Dialog que pregunta si desea eliminar o no-->
+            <v-dialog v-model="dialog_delete" max-width="40rem" persistent>
+                <!-- Formulario para agregar empleado -->
+                <v-card>
+                    <v-card-title>Aviso</v-card-title>
+                    <v-card-text>
+                        ¿Está seguro de que desea eliminar el curso?
+                    </v-card-text>
+                    <v-card-actions>
+                        <v-btn @click="deleteCourse">Aceptar</v-btn>
+                        <v-btn @click="cerrarDialogEliminar">Cancelar</v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
+
             <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
                 {{ message }}
             </v-snackbar>
@@ -62,7 +77,6 @@
 </template>
   
 <script>
-import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
 
 export default {
@@ -78,10 +92,12 @@ export default {
             snackbar: false,
             message: '',
             color: '',
-            timeout: 3000,
+            timeout: 2000,
             //Variable del dialog
             dialog: false,
             dialogTitle: '',
+            //Dialog delete
+            dialog_delete: false,
             //Datos del formulario   
             nameField: null,
             descriptionField: null,
@@ -98,7 +114,7 @@ export default {
             ],
             //Controlando si está agregando o modificando
             isAdd: true,
-            //Empleado, variable necesaria cuando se va a modificar
+            //course, variable necesaria cuando se va a modificar y eliminar
             course: null,
         };
     },
@@ -120,8 +136,6 @@ export default {
             this.isAdd = true;
             this.dialog = true;
             this.dialogTitle = "Agregando Curso";
-            //Habilitar checkbox
-            this.isProfesor = true;
         },
         async openUpdateCourse(course) {
             try {
@@ -140,6 +154,12 @@ export default {
                 console.error("Error al cargar el dialog", error.response.data)
             }
 
+        }, openDialogDelete(course) {
+            this.dialog_delete = true;
+            this.course = course;
+        },
+        cerrarDialogEliminar() {
+            this.dialog_delete = false;
         },
         cerrarFormulario() {
             //Datos del formulario
@@ -189,13 +209,15 @@ export default {
                     cost: this.costField,
                 }
                 const response = await this.$axios.put(`/course/${this.course.id}`, course_json);
+                //Poner el elemento devuelto en la lista desde el server en la lista
+                let course_response = response.data.course;
+                let courseIndex = this.courses.findIndex(e => e.id == course_response.id);
+                this.courses[courseIndex] = course_response;
                 this.cerrarFormulario();
                 //preparar mensaje
                 this.message = response.data.message;
                 this.color = 'success';
                 this.snackbar = true;
-                //Recargar visual
-                this.fetchData();
             } catch (error) {
                 console.error('Error al modificar la curso:', error.response.data);
                 if (error.response && error.response.status == 422) {
@@ -209,11 +231,16 @@ export default {
         },
 
         //Eliminando un empleado
-        async deleteCourse(course) {
+        async deleteCourse() {
             try {
-                console.log(course);
+                //Tomo el curso enviado desde la tabla que se guarda en la variable global curso
+                let course = this.course;
+                //Ejecuto la eliminación en el servidor
                 const response = await this.$axios.delete(`/course/${course.id}`);
+                //Elimino de la tabla
                 this.courses = this.courses.filter(e => e.id !== course.id); // esto elimina la curso eliminada de la lista
+                //Cierro el dialog
+                this.dialog_delete = false;
                 //preparar mensaje
                 this.message = response.data.message;
                 this.color = 'success';
