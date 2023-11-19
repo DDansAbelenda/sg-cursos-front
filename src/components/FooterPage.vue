@@ -36,7 +36,7 @@
     <v-container>
       <v-row>
         <v-col>
-          <p class="text-center">© 2023 Tu Compañía. Todos los derechos reservados.</p>
+          <p class="text-center">© 2023 Course Management System. Todos los derechos reservados.</p>
         </v-col>
       </v-row>
     </v-container>
