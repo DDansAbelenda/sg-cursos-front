@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="principal">
     <v-container>
       <v-row column="3">
         <v-col md="6" sm="12">
@@ -11,14 +11,7 @@
             <p>Email: ddansabelenda@gmail.com</p>
           </div>
         </v-col>
-        <v-col md="6" sm="12">
-          <div class="contact-info">
-            <h4>Información:</h4>
-            <p>Este sitio fue desarrollado como parte de una tarea final de programación
-              web de la asignatura que lleva su mismo nombre.
-            </p>
-          </div>
-        </v-col>
+
         <v-col md="6" sm="12">
           <div class="contact-info">
             <h4>Equipo de desarrollo</h4>
@@ -52,17 +45,17 @@ export default {
 <style scoped>
 .contact-info {
   margin-bottom: 20px;
-  color: white;
+  color: #302f2f;
 }
 
-div {
-  background-color: #333;
-  /* Gris oscuro */
+.principal {
+  background-color: rgb(172, 172, 172);
   width: 100%;
+
 }
 
 p.text-center {
-  color: #fff;
+  color: #302f2f;
   /* Texto blanco */
 }
 </style>
