@@ -91,7 +91,7 @@
       <EditionDetail :edition ="edition" ref="detail_dialog" />
 
     </v-container>
-    <!--Fin del contenedor principal-->>
+    <!--Fin del contenedor principal-->
   </v-app>
 </template>
 
@@ -196,7 +196,7 @@ export default {
         this.dialog = true;
         this.dialogTitle = "Modificando Edición";
       } catch (error) {
-        console.error("Error al cargar el dialog", error.response.data)
+        console.error("Error al cargar el dialog", error)
       }
     },
 
@@ -239,7 +239,7 @@ export default {
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al agregar edición:', error.response.data);
+        console.error('Error al agregar edición:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -302,7 +302,7 @@ export default {
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al eliminar edición:', error.response.data);
+        console.error('Error al eliminar edición:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -351,7 +351,7 @@ export default {
         this.professor = response_professor.data;
 
       } catch (error) {
-        console.error('Error al obtener ediciones:', error.response.data);
+        console.error('Error al obtener ediciones:', error);
       } finally {
         this.toggleLoading();
       }

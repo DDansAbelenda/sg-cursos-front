@@ -2,6 +2,7 @@
   <v-app>
     <LoadingPage :isLoading="loading" />
     <v-container>
+      <div id="header"></div>
       <v-row>
         <v-col>
           <!-- Tabla de empleados -->
@@ -195,7 +196,7 @@ export default {
         this.dialog = true;
         this.dialogTitle = "Modificando Empleado";
       } catch (error) {
-        console.error("Error al cargar el dialog", error.response.data)
+        console.error("Error al cargar el dialog", error)
       }
     },
     openDialogDelete(employee) {
@@ -244,7 +245,7 @@ export default {
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al agregar empleado:', error.response.data);
+        console.error('Error al agregar empleado:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -310,7 +311,7 @@ export default {
         this.color = 'success';
         this.snackbar = true;
       } catch (error) {
-        console.error('Error al eliminar empleado:', error.response.data);
+        console.error('Error al eliminar empleado:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
           //preparar mensaje
@@ -337,7 +338,7 @@ export default {
         const response = await this.$axios.get('/employee');
         this.employees = response.data;
       } catch (error) {
-        console.error('Error al obtener empleados:', error.response.data);
+        console.error('Error al obtener empleados:', error);
       } finally {
         this.toggleLoading();
       }

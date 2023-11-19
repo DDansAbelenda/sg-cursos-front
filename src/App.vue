@@ -13,12 +13,12 @@
           <v-btn to="/edition">Ediciones</v-btn>
         </div>
         <v-spacer></v-spacer>
-        <v-toolbar-title>SGCPT</v-toolbar-title>
+        <v-toolbar-title>Course Management System</v-toolbar-title>
       </v-app-bar>
 
       <!--Menu lateral-->
       <v-navigation-drawer v-model="drawer" temporary>
-        <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg" title="John Leider"></v-list-item>
+        <v-list-item prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg" title="CMS"></v-list-item>
         <v-divider></v-divider>
         <v-list density="compact" nav>
           <v-list-item to="/" prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
@@ -32,12 +32,17 @@
       <div class="content">
         <router-view />
       </div>
+      <FooterPage />
     </div>
   </v-app>
 </template>
 
 <script>
+import FooterPage from './components/FooterPage.vue';
 export default {
+  components: {
+    FooterPage
+  },
   data() {
     return {
       drawer: null,
@@ -59,6 +64,9 @@ export default {
 
 @media(max-width:860px) {
   .nav-bar-items {
+    display: none;
+  }
+  .v-spacer{
     display: none;
   }
 

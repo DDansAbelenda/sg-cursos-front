@@ -11,13 +11,16 @@ import * as directives from 'vuetify/directives'
 //Icons
 import '@mdi/font/css/materialdesignicons.css'
 import '@fortawesome/fontawesome-free/css/all.css'
+//Viajar a seccion especifica
+import VueScrollTo from 'vue-scrollto'
+
 const vuetify = createVuetify({
     components,
     directives,
     iconfont: 'md',
 })
 
-const app = createApp(App).use(router).use(vuetify);
+const app = createApp(App).use(router).use(vuetify).use(VueScrollTo);
 
 // Configuración global de Axios
 axios.defaults.baseURL = 'http://localhost:8000/api';

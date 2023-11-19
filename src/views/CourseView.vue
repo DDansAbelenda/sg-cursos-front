@@ -151,7 +151,7 @@ export default {
                 this.dialog = true;
                 this.dialogTitle = "Modificando Curso";
             } catch (error) {
-                console.error("Error al cargar el dialog", error.response.data)
+                console.error("Error al cargar el dialog", error)
             }
 
         }, openDialogDelete(course) {
@@ -188,7 +188,7 @@ export default {
                 this.color = 'success';
                 this.snackbar = true;
             } catch (error) {
-                console.error('Error al agregar curso:', error.response.data);
+                console.error('Error al agregar curso:', error);
                 if (error.response && error.response.status == 422) {
                     const validationErrors = error.response.data.errors;
                     //preparar mensaje
@@ -219,7 +219,7 @@ export default {
                 this.color = 'success';
                 this.snackbar = true;
             } catch (error) {
-                console.error('Error al modificar la curso:', error.response.data);
+                console.error('Error al modificar la curso:', error);
                 if (error.response && error.response.status == 422) {
                     const validationErrors = error.response.data.errors;
                     //preparar mensaje
@@ -246,7 +246,7 @@ export default {
                 this.color = 'success';
                 this.snackbar = true;
             } catch (error) {
-                console.error('Error al eliminar curso:', error.response.data);
+                console.error('Error al eliminar curso:', error);
                 if (error.response && error.response.status == 422) {
                     const validationErrors = error.response.data.errors;
                     //preparar mensaje
@@ -268,7 +268,7 @@ export default {
                 const response = await this.$axios.get('/course');
                 this.courses = response.data;
             } catch (error) {
-                console.error('Error al obtener cursos:', error.response.data);
+                console.error('Error al obtener cursos:', error);
             } finally {
                 this.toggleLoading();
             }
