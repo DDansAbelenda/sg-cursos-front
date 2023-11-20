@@ -121,24 +121,37 @@ export default {
 <style scoped>
 .hero-section {
   background-image: url('../assets/hero_section.jpg');
+
 }
 
 .employee-section {
   background-image: url('../assets/employee_section.jpg');
+
 }
 
 .course-section {
   background-image: url('../assets/cursos_section.jpg');
+
 }
 
 .edition-section {
   background-image: url('../assets/edition_section.jpg');
+
 }
 
 .section {
   background-size: cover;
+  background-position: center;
   height: 100vh;
   background-color: #e0e0e0;
+}
+
+@media(max-width:860px) {
+  .section{
+    background-size: 200%;
+    height: 60vh;
+  }
+  
 }
 
 /* Puedes cambiar el color de fondo según tu diseño */
