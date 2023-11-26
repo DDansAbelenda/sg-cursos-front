@@ -57,7 +57,12 @@
               <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
                 <v-icon color="red darken-1">mdi-delete</v-icon>
               </v-btn>
+              <v-btn class="info" icon @click="openDialogDetail(item)" flat>
+                <v-icon color="yellow darken-1">mdi-information-variant-circle-outline</v-icon>
+              </v-btn>
             </template>
+
+
             <!-- Definimos estructura de los valores de ¿Está calificado? -->
             <template v-slot:item.is_qualified="{ item }">
               <div class="text-end">
@@ -88,6 +93,9 @@
       <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
         {{ message }}
       </v-snackbar>
+
+      <EmployeeDetail :employee ="employee" ref="detail_dialog" />
+
     </v-container>
   </v-app>
 </template>
@@ -95,11 +103,12 @@
 <script>
 import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
-
+import EmployeeDetail from '../components/EmployeeDetail.vue'
 export default {
   name: 'EmployeeView',
   components: {
     LoadingPage,
+    EmployeeDetail,
   },
   data() {
     return {
@@ -132,12 +141,9 @@ export default {
       headers: [
         { title: 'Nombre', key: 'name' },
         { title: 'Apellidos', value: 'last_names' },
-        { title: 'Dirección', value: 'address' },
-        { title: 'Teléfono', value: 'phone' },
         { title: 'NIF', value: 'nif' },
         { title: 'Nacionalidad', value: 'nationality' },
         { title: 'Salario', value: 'salary' },
-        { title: 'Sexo', value: 'sex' },
         { title: '¿Está calificado?', value: 'is_qualified' },
         { title: 'Fecha Nacimiento', value: 'date_birth' },
         { title: 'Acciones', value: 'actions', sortable: false },
@@ -220,6 +226,24 @@ export default {
         this.dateSelected = new Date(),
         //Dialog
         this.dialog = false;
+    },
+    //Abrir el diaglo de detalles
+    async openDialogDetail(employee) {
+      //Se llama a las referencias del componente y se activa sus metodos
+      try {
+        const response = await this.$axios.get(`/employeeall/${employee.id}`);
+        let employee_all ={
+          'info':employee,
+          'study_in': response.data.study_in,
+          'teach_in': response.data.teach_in,
+        };
+        console.log(response.data.study_in);
+        this.employee = employee_all;
+        this.$refs.detail_dialog.abrir();
+      } catch (error) {
+        console.error(error.response.data);
+      }
+
     },
 
     //Creando un empleado
