@@ -33,7 +33,7 @@
                         <v-text-field v-model="nifField" label="NIF" required></v-text-field>
                         <v-text-field v-model="nationalityField" label="Nacionalidad" required></v-text-field>
                         <v-text-field v-model="salaryField" label="Salario" required></v-text-field>
-                        <v-select v-model="selectedSex" :items="sexo" label="Selecciona una opción"></v-select>
+                        <v-select v-model="selectedSex" :items="sexo" label="Selecciona el Sexo"></v-select>
                         <v-checkbox :disabled="isProfessor" v-model="isQualified"
                           label="¿Está calificado para dar clases?" @click="toggleCheckbox"></v-checkbox>
                         <v-date-picker v-model="dateSelected" title="Fecha de Nacimiento" label="Fecha de Nacimiento"
