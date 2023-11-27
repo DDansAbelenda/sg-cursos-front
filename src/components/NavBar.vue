@@ -13,12 +13,12 @@
                 <v-btn to="/about">About Us</v-btn>
             </div>
             <v-spacer></v-spacer>
-            <v-toolbar-title>Course Management System</v-toolbar-title>
+            <v-toolbar-title>Sistema de Gestión de Cursos</v-toolbar-title>
         </v-app-bar>
 
         <!--Menu lateral-->
         <v-navigation-drawer v-model="drawer" temporary>
-            <v-list-item title="CMS"></v-list-item>
+            <v-list-item title="SGC"></v-list-item>
             <v-divider></v-divider>
             <v-list density="compact" nav>
                 <v-list-item to="/" prepend-icon="mdi-view-dashboard" title="Home" value="home"></v-list-item>
