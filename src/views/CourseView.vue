@@ -104,7 +104,7 @@ export default {
             numerHoursField: null,
             costField: null,
             //Datos de las tablas
-            courses: [], // Aquí deberías cargar los datos de tus empleados desde Laravel
+            courses: [], 
             headers: [
                 { title: 'Nombre', key: 'name' },
                 { title: 'Descripción', value: 'description' },

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <!-- Sección de héroe -->
+    <!-- Principal Container -->
     <v-container fluid>
       <v-row>
         <v-col cols="12">
@@ -108,7 +108,7 @@ export default {
   name: 'HomeView',
   methods: {
     scrollToElement() {
-      // Utiliza JavaScript para desplazarte al elemento
+      // Utiliza JavaScript para desplazarse hasta al elemento
       const element = document.getElementById('employee');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -154,5 +154,4 @@ export default {
   
 }
 
-/* Puedes cambiar el color de fondo según tu diseño */
 </style>

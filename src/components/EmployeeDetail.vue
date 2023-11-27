@@ -3,7 +3,8 @@
     <v-dialog v-model="dialog" fullscreen :scrim="false" transition="dialog-bottom-transition">
         <v-card>
             <v-toolbar dark>
-                <v-toolbar-title>{{ employee.info.sex == 'Masculino' ? 'Empleado ' + employee.info.name :'Empleada ' + employee.info.name }}</v-toolbar-title>
+                <v-toolbar-title>{{ employee.info.sex == 'Masculino' ? 'Empleado ' + employee.info.name : 'Empleada ' +
+                    employee.info.name }}</v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-toolbar-items>
                     <v-btn icon dark @click="cerrar">
@@ -38,7 +39,7 @@
                             </v-list-item>
                             <v-list-item title="Sexo" :subtitle="employee.info.sex">
                             </v-list-item>
-                            <v-list-item title="¿Está calificado par dar clases?"
+                            <v-list-item title="¿Está calificado para dar clases?"
                                 :subtitle="employee.info.is_qualified ? 'Sí' : 'No'">
                             </v-list-item>
                         </v-list>
@@ -100,16 +101,12 @@ li {
     margin-bottom: 8px;
     padding-left: 20px;
     position: relative;
-    /* Cambia la fuente según tus preferencias */
 }
 
 li:before {
     content: '\2022';
-    /* Código Unicode para el caracter de viñeta (punto) */
     color: #2477cf;
-    /* Color de la viñeta */
     font-weight: bold;
-    /* Opcional: Hace que la viñeta sea más visible */
     position: absolute;
     left: 0;
     top: 50%;

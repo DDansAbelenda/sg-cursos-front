@@ -137,7 +137,7 @@ export default {
       dateSelected: new Date(),
       sexo: ['Masculino', 'Femenino'],
       //Datos de las tablas
-      employees: [], // Aquí deberías cargar los datos de tus empleados desde Laravel
+      employees: [], 
       headers: [
         { title: 'Nombre', key: 'name' },
         { title: 'Apellidos', value: 'last_names' },

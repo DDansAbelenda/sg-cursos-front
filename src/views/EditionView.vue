@@ -133,8 +133,8 @@ export default {
       //Estudiantes de la edición
       students: [],
       selectedStudents: [],
+      editions: [], 
       //Datos de las tablas
-      editions: [], // Aquí deberías cargar los datos de tus ediciones desde Laravel
       headers: [
         { title: 'Código', key: 'code_id' },
         { title: 'Curso', value: 'course.name' },

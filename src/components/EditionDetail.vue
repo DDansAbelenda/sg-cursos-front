@@ -76,16 +76,13 @@ li {
     margin-bottom: 8px;
     padding-left: 20px;
     position: relative;
-    /* Cambia la fuente según tus preferencias */
+    
 }
 
 li:before {
     content: '\2022';
-    /* Código Unicode para el caracter de viñeta (punto) */
     color: #2477cf;
-    /* Color de la viñeta */
     font-weight: bold;
-    /* Opcional: Hace que la viñeta sea más visible */
     position: absolute;
     left: 0;
     top: 50%;
