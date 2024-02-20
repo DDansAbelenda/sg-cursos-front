@@ -94,7 +94,7 @@
         {{ message }}
       </v-snackbar>
 
-      <EmployeeDetail :employee ="employee" ref="detail_dialog" />
+      <EmployeeDetail :employee="employee" ref="detail_dialog" />
 
     </v-container>
   </v-app>
@@ -104,6 +104,7 @@
 import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
 import EmployeeDetail from '../components/EmployeeDetail.vue'
+import axios from 'axios';
 export default {
   name: 'EmployeeView',
   components: {
@@ -137,7 +138,7 @@ export default {
       dateSelected: new Date(),
       sexo: ['Masculino', 'Femenino'],
       //Datos de las tablas
-      employees: [], 
+      employees: [],
       headers: [
         { title: 'Nombre', key: 'name' },
         { title: 'Apellidos', value: 'last_names' },
@@ -232,8 +233,8 @@ export default {
       //Se llama a las referencias del componente y se activa sus metodos
       try {
         const response = await this.$axios.get(`/employeeall/${employee.id}`);
-        let employee_all ={
-          'info':employee,
+        let employee_all = {
+          'info': employee,
           'study_in': response.data.study_in,
           'teach_in': response.data.teach_in,
         };
@@ -356,16 +357,26 @@ export default {
       this.loading = !this.loading;
     },
     //Cargando todos los empleados
-    async fetchData() {
+
+    fetchData() {
+
       this.toggleLoading();
-      try {
-        const response = await this.$axios.get('/employee');
-        this.employees = response.data;
-      } catch (error) {
-        console.error('Error al obtener empleados:', error);
-      } finally {
-        this.toggleLoading();
+      
+      async function fetchEmployeeData(url) {
+        const response = axios.get(url);
+        return response;
       }
+      
+      fetchEmployeeData('/employee').then(
+        (response) => {
+          this.employees = response.data;
+          this.toggleLoading();
+        },
+        (error) => {
+          console.error('Error al obtener empleados:', error);
+          this.toggleLoading();
+        }
+      );
     }
   },
   mounted() {
