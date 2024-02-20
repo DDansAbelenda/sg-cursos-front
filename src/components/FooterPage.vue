@@ -19,7 +19,6 @@
               <li>Aida Rosa Calvo Fleites</li>
               <li>Daniel Dans Abelenda</li>
               <li>Lester Enrique Perez Carballedo</li>
-              <li>Mario Abel Ortega</li>
             </ul>
           </div>
         </v-col>
@@ -29,7 +28,8 @@
     <v-container>
       <v-row>
         <v-col>
-          <p class="text-center">© 2023 Sistema de Gestión de Cursos. Todos los derechos reservados.</p>
+          <p class="text-center">© <span id="year">2023</span> Sistema de Gestión de Cursos. Todos los derechos
+            reservados.</p>
         </v-col>
       </v-row>
     </v-container>
@@ -38,6 +38,16 @@
 
 <script>
 export default {
+  name: 'FooterPage',
+  methods: {
+    setYear() {
+      let fecha = new Date();
+      document.querySelector('#year').innerHTML = fecha.getFullYear();
+    }
+  },
+  mounted() {
+    this.setYear();
+  }
 };
 </script>
 

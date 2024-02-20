@@ -20,7 +20,7 @@
             </v-col>
         </v-row>
         <v-row>
-            <v-col v-for="member in teamMembers" :key="member.name" cols="12" md="6">
+            <v-col v-for="member in teamMembers" :key="member.name" cols="12">
                 <v-card>
                     <v-card-title class="headline">{{ member.name }}</v-card-title>
                     <v-card-subtitle>{{ member.role }}</v-card-subtitle>
@@ -81,11 +81,6 @@ export default {
                     name: 'Lester Enrique Perez Carballedo',
                     role: 'Desarrollador Web',
                     description: 'Lester contribuyó significativamente al diseño y la arquitectura general de la aplicación, garantizando su escalabilidad y rendimiento óptimo.',
-                },
-                {
-                    name: 'Mario Abel Ortega',
-                    role: 'Desarrollador Web',
-                    description: 'Mario fue fundamental en la integración de diferentes componentes del sistema, asegurando una comunicación fluida y eficiente entre el front-end y el back-end.',
                 },
             ],
         };
