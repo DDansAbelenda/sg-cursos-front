@@ -34,7 +34,7 @@
                         <v-select v-model="selectedStudents" :items="studentItems" label="Selecciona los estudiantes"
                           multiple required></v-select>
                         <v-text-field v-model="placefield" label="Lugar del curso" required></v-text-field>
-                        <v-select v-model="selectedPeriod" :items="sessionPeriods" label="Selecciona una opción" required>
+                        <v-select v-model="selectedPeriod" :items="sessionPeriods" label="Selecciona un horario" required>
                         </v-select>
                         <v-date-picker v-model="selectedDate" title="Fecha de Inicio" label="Fecha de Inicio"
                           required></v-date-picker>
