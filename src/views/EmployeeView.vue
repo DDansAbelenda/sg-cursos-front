@@ -73,13 +73,7 @@
           </v-data-table>
         </v-col>
       </v-row>
-      <!--Notificación que se muestra ante una acción-->
-      <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
-        {{ message }}
-      </v-snackbar>
-
       <EmployeeDetail :employee="employee" ref="detail_dialog" />
-
     </v-container>
   </v-app>
 </template>
@@ -90,7 +84,7 @@ import LoadingPage from '../components/LoadingPage.vue'
 import EmployeeDetail from '../components/EmployeeDetail.vue'
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
-import { confirmation } from '@/function';
+import { confirmation, show_alert } from '@/function';
 
 export default {
   name: 'EmployeeView',
@@ -102,11 +96,6 @@ export default {
     return {
       //Controlar el loading
       loading: false,
-      //Notificacion
-      snackbar: false,
-      message: '',
-      color: '',
-      timeout: 2000,
       //Variable del dialog
       dialog: false,
       dialogTitle: '',
@@ -155,6 +144,7 @@ export default {
         this.updateEmployee();
       }
     },
+
     openAddEmployee() {
       //Modificar la variable isAdd para que se sepa que está agregando
       this.isAdd = true;
@@ -163,6 +153,7 @@ export default {
       //Habilitar checkbox
       this.isProfessor = false;
     },
+
     async openUpdateEmployee(employee) {
       try {
         //Modificar la variable isAdd para que se sepa que está modificando
@@ -191,6 +182,7 @@ export default {
         console.error("Error al cargar el dialog", error)
       }
     },
+
     cerrarFormulario() {
       //Datos del formulario
       this.nameField = null;
@@ -206,6 +198,7 @@ export default {
         //Dialog
         this.dialog = false;
     },
+
     //Abrir el diaglo de detalles
     async openDialogDetail(employee) {
       //Se llama a las referencias del componente y se activa sus metodos
@@ -222,7 +215,6 @@ export default {
       } catch (error) {
         console.error(error.response.data);
       }
-
     },
 
     //Creando un empleado
@@ -243,18 +235,19 @@ export default {
         const response = await this.$axios.post('/api/employee', employee); // El segundo parámetro es un JSON que es el request
         this.employees.push(response.data.employee);
         this.cerrarFormulario();
-        //preparar mensaje
-        this.message = response.data.message;
-        this.color = 'success';
-        this.snackbar = true;
+        //Enviar mensaje
+        show_alert(response.data.message, 'success', '');
       } catch (error) {
         console.error('Error al agregar empleado:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
-          //preparar mensaje
-          this.message = validationErrors;
-          this.color = 'error';
-          this.snackbar = true;
+          this.dialog = false;
+          const swal = show_alert(validationErrors, 'error', '');
+          //Auto confirmar en 2 segundos y volver abrir el dialog
+          const timeoutID = setTimeout(() => {
+            swal.clickConfirm();
+            this.dialog = true;
+          }, 2000);
         }
       }
     },
@@ -282,18 +275,18 @@ export default {
         //Cerrar el formulario    
         this.cerrarFormulario();
         //preparar mensaje
-        this.message = response.data.message;
-        this.color = 'success';
-        this.snackbar = true;
-
+        show_alert(response.data.message, 'success', '');
       } catch (error) {
         console.error('Error al modificar la empleado:', error);
         if (error.response && error.response.status == 422) {
           const validationErrors = error.response.data.errors;
-          //preparar mensaje
-          this.message = validationErrors;
-          this.color = 'error';
-          this.snackbar = true;
+          this.dialog = false;
+          const swal = show_alert(validationErrors, 'error', '');
+          //Auto confirmar en 2 segundos y volver abrir el dialog
+          const timeoutID = setTimeout(() => {
+            swal.clickConfirm();
+            this.dialog = true;
+          }, 2000);
         }
       }
     },
@@ -312,17 +305,14 @@ export default {
     toggleLoading() {
       this.loading = !this.loading;
     },
+
     //Cargando todos los empleados
-
     fetchData() {
-
       this.toggleLoading();
-
       async function fetchEmployeeData(url) {
         const response = axios.get(url);
         return response;
       }
-
       fetchEmployeeData('/api/employee').then(
         (response) => {
           this.employees = response.data;
@@ -335,6 +325,7 @@ export default {
       );
     }
   },
+
   mounted() {
     const authStore = useAuthStore();
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + authStore.authToken;

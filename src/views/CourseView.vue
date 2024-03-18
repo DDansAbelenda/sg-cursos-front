@@ -54,16 +54,13 @@
                     </v-data-table>
                 </v-col>
             </v-row>
-            <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
-                {{ message }}
-            </v-snackbar>
         </v-container>
     </v-app>
 </template>
 <script>
 import LoadingPage from '../components/LoadingPage.vue'
 import { useAuthStore } from '@/store/auth';
-import { confirmation } from '@/function';
+import { confirmation, show_alert } from '@/function';
 
 export default {
     name: 'CourseView',
@@ -74,11 +71,6 @@ export default {
         return {
             //Controlar el loading
             loading: false,
-            //Notificacion
-            snackbar: false,
-            message: '',
-            color: '',
-            timeout: 2000,
             //Variable del dialog
             dialog: false,
             dialogTitle: '',
@@ -161,18 +153,19 @@ export default {
                 const response = await this.$axios.post('/api/course', course); // El segundo parámetro es un JSON que es el request
                 this.courses.push(response.data.course);
                 this.cerrarFormulario();
-                //preparar mensaje
-                this.message = response.data.message;
-                this.color = 'success';
-                this.snackbar = true;
+                //Enviar mensaje
+                show_alert(response.data.message, 'success', '');
             } catch (error) {
                 console.error('Error al agregar curso:', error);
                 if (error.response && error.response.status == 422) {
                     const validationErrors = error.response.data.errors;
-                    //preparar mensaje
-                    this.message = validationErrors;
-                    this.color = 'error';
-                    this.snackbar = true;
+                    this.dialog = false;
+                    const swal = show_alert(validationErrors, 'error', '');
+                    //Auto confirmar en 2 segundos y volver abrir el dialog
+                    const timeoutID = setTimeout(() => {
+                        swal.clickConfirm();
+                        this.dialog = true;
+                    }, 2000);
                 }
             }
         },
@@ -193,17 +186,18 @@ export default {
                 this.courses[courseIndex] = course_response;
                 this.cerrarFormulario();
                 //preparar mensaje
-                this.message = response.data.message;
-                this.color = 'success';
-                this.snackbar = true;
+                show_alert(response.data.message, 'success', '');
             } catch (error) {
                 console.error('Error al modificar la curso:', error);
                 if (error.response && error.response.status == 422) {
                     const validationErrors = error.response.data.errors;
-                    //preparar mensaje
-                    this.message = validationErrors;
-                    this.color = 'error';
-                    this.snackbar = true;
+                    this.dialog = false;
+                    const swal = show_alert(validationErrors, 'error', '');
+                    //Auto confirmar en 2 segundos y volver abrir el dialog
+                    const timeoutID = setTimeout(() => {
+                        swal.clickConfirm();
+                        this.dialog = true;
+                    }, 2000);
                 }
             }
         },

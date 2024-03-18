@@ -11,6 +11,7 @@ export function show_alert(msj, icon, focus) {
     Swal.fire({
         title: msj, icon: icon, buttonsStyling: true
     });
+    return Swal;
 }
 
 export function confirmation(name, url, redirect) {
