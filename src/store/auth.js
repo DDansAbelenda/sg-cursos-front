@@ -45,7 +45,7 @@ export const useAuthStore = defineStore('auth', {
             await axios.post('/api/auth/register', form).then(
                 (res) => {
                     show_alert(res.data.message, 'success', '');
-                    setTimeout(() => this.router.push('/login'), 2000);
+                    setTimeout(() => window.location.href = '/register', 2000);
                 }
             ).catch(
                 (errors) => {

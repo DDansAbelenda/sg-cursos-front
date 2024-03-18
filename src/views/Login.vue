@@ -7,11 +7,10 @@
                     <v-card-text>
                         <v-form @submit.prevent="authStore.login(form)">
                             <v-text-field v-model="form.email" label="Email" outlined prepend-icon="mdi-at"
-                                autofocus></v-text-field>
+                                autofocus class="input"></v-text-field>
                             <v-text-field v-model="form.password" label="Password" outlined prepend-icon="mdi-key"
-                                type="password"></v-text-field>
-                            <v-btn type="submit" dark block>Login</v-btn>
-                            <v-btn text color="primary" block to="/register">Register</v-btn>
+                                type="password" class="input"></v-text-field>
+                            <v-btn type="submit" class="bg-blue-grey-darken-4 input" dark block >Login</v-btn>
                         </v-form>
                     </v-card-text>
                 </v-card>
@@ -30,3 +29,9 @@ const form = ref({
     password: 'password'
 })
 </script>
+
+<style>
+.input{
+    margin-top: 1rem;
+}
+</style>

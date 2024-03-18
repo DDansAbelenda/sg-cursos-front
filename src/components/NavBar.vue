@@ -11,10 +11,10 @@
                 <v-btn to="/course">Cursos</v-btn>
                 <v-btn to="/edition">Ediciones</v-btn>
                 <v-btn to="/about">About Us</v-btn>
+                <v-btn to="/register">Usuarios</v-btn>
             </div>
-            <v-spacer v-if="authStore.user"></v-spacer>
-            <v-toolbar-title>Sistema de Gestión de Cursos</v-toolbar-title>
-            <v-btn v-if="authStore.user" @click="authStore.logout">Salir</v-btn>
+            <v-toolbar-title class="title">Sistema de Gestión de Cursos</v-toolbar-title>
+            <v-btn class="bg-green-darken-4" v-if="authStore.user" @click="authStore.logout">LOGOUT</v-btn>
         </v-app-bar>
 
         <!--Menu lateral-->
@@ -43,6 +43,9 @@ const authStore = useAuthStore();
 const drawer = ref(null);
 </script>  
 <style>
+.title{
+    margin: 0 6rem !important;
+}
 .menu-icon {
     pointer-events: none;
     visibility: hidden;
@@ -61,5 +64,8 @@ const drawer = ref(null);
         pointer-events: auto;
         visibility: visible;
     }
+    .title{
+    margin: 0 !important;
+}
 }
 </style>  
