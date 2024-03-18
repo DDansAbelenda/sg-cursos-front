@@ -8,12 +8,12 @@
                     <v-card-text>
                         <v-form @submit.prevent="authStore.register(form)">
                             <v-text-field v-model="form.name" label="Name" outlined prepend-icon="mdi-account" autofocus
-                                class="input"></v-text-field>
+                                class="input" required></v-text-field>
                             <v-text-field v-model="form.email" label="Email" outlined prepend-icon="mdi-at"
-                                class="input"></v-text-field>
+                                class="input" required></v-text-field>
                             <v-text-field v-model="form.password" label="Password" outlined prepend-icon="mdi-key"
-                                type="password" class="input"></v-text-field>
-                            <v-btn type="submit" dark block class="input">Send</v-btn>
+                                type="password" class="input" required></v-text-field>
+                            <v-btn type="submit" dark block class="input">Crear</v-btn>
                         </v-form>
                     </v-card-text>
                 </v-card>

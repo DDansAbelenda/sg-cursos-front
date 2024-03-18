@@ -34,9 +34,9 @@ export const useAuthStore = defineStore('auth', {
                 }
             ).catch(
                 (errors) => {
-                const res = errors.response.data.errors;
-                show_alert(res, 'error', ''); 
-                console.log(errors.response.data.errors);
+                    const res = errors.response.data.errors;
+                    show_alert(res, 'error', '');
+                    console.log(errors.response.data.errors);
                 }
             )
         },
@@ -49,11 +49,9 @@ export const useAuthStore = defineStore('auth', {
                 }
             ).catch(
                 (errors) => {
-                    let desc = '';
-                    errors.response.data.errors.map(
-                        (e) => { desc = desc + ' ' + e }
-                    );
-                    show_alert(desc, 'error', '');
+                    const res = errors.response.data.errors;
+                    show_alert(res, 'error', '');
+                    console.log(errors.response.data.errors);
                 }
             )
         },

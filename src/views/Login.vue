@@ -7,9 +7,9 @@
                     <v-card-text>
                         <v-form @submit.prevent="authStore.login(form)">
                             <v-text-field v-model="form.email" label="Email" outlined prepend-icon="mdi-at"
-                                autofocus class="input"></v-text-field>
+                                autofocus class="input" required></v-text-field>
                             <v-text-field v-model="form.password" label="Password" outlined prepend-icon="mdi-key"
-                                type="password" class="input"></v-text-field>
+                                type="password" class="input" required></v-text-field>
                             <v-btn type="submit" class="bg-blue-grey-darken-4 input" dark block >Login</v-btn>
                         </v-form>
                     </v-card-text>
@@ -25,8 +25,8 @@ import { useAuthStore } from '@/store/auth';
 const authStore = useAuthStore();
 
 const form = ref({
-    email: 'admin@email.com',
-    password: 'password'
+    email: '',
+    password: ''
 })
 </script>
 
