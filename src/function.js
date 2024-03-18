@@ -16,10 +16,10 @@ export function show_alert(msj, icon, focus) {
 export function confirmation(name, url, redirect) {
     const alert = Swal.mixin({ buttonsStyling: true });
     alert.fire({
-        title: 'Are you sure delete ' + name + ' ?',
+        title: 'Seguro que deseas eliminar a ' + name + ' ?',
         icon: 'question', showCancelButton: true,
-        confirmButtonText: '<i class="fa-solid fa-check"></i> Yes, delete',
-        cancelButtonText: '<i class="fa-solid fa-check"></i> Cancel'
+        confirmButtonText: '<i class="fa-solid fa-check"></i> Sí, eliminar',
+        cancelButtonText: '<i class="fa-solid fa-check"></i> Cancelar'
     }).then((result) => {
         if (result.isConfirmed) {
             sendRequest('DELETE', {}, url, redirect);
@@ -39,14 +39,10 @@ export async function sendRequest(method, params, url, redirect = '') {
                     () => (redirect !== '') ? window.location.href = redirect : '', 2000)
         }
     ).catch((errors) => {
-        let desc = '';
-        res = errors.response.data.status;
-        Object.values(errors.response.data.errors).forEach(e => {
-            desc = desc + ' ' + e
-        });
-        show_alert(desc, 'error', '')
+        const res = errors.response.data.errors;
+        show_alert(res, 'error', '')
         //console.log(JSON.stringify(errors.response.data));
-        //console.log(errors.response.data.status);
+        //console.log(errors.response.data.errors);
     })
     return res;
 }

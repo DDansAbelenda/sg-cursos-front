@@ -47,38 +47,23 @@
                             <v-btn class="edit" icon @click="openUpdateCourse(item)" flat>
                                 <v-icon color="blue darken-1">mdi-pencil</v-icon>
                             </v-btn>
-                            <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
+                            <v-btn class="delete" icon @click="deleteCourse(item)" flat>
                                 <v-icon color="red darken-1">mdi-delete</v-icon>
                             </v-btn>
                         </template>
                     </v-data-table>
                 </v-col>
             </v-row>
-            <!--Dialog que pregunta si desea eliminar o no-->
-            <v-dialog v-model="dialog_delete" max-width="40rem" persistent>
-                <!-- Formulario para agregar empleado -->
-                <v-card>
-                    <v-card-title>Aviso</v-card-title>
-                    <v-card-text>
-                        ¿Está seguro de que desea eliminar el curso?
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-btn @click="deleteCourse">Aceptar</v-btn>
-                        <v-btn @click="cerrarDialogEliminar">Cancelar</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
-
             <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
                 {{ message }}
             </v-snackbar>
         </v-container>
     </v-app>
 </template>
-  
 <script>
 import LoadingPage from '../components/LoadingPage.vue'
 import { useAuthStore } from '@/store/auth';
+import { confirmation } from '@/function';
 
 export default {
     name: 'CourseView',
@@ -97,8 +82,6 @@ export default {
             //Variable del dialog
             dialog: false,
             dialogTitle: '',
-            //Dialog delete
-            dialog_delete: false,
             //Datos del formulario   
             nameField: null,
             descriptionField: null,
@@ -155,12 +138,6 @@ export default {
                 console.error("Error al cargar el dialog", error)
             }
 
-        }, openDialogDelete(course) {
-            this.dialog_delete = true;
-            this.course = course;
-        },
-        cerrarDialogEliminar() {
-            this.dialog_delete = false;
         },
         cerrarFormulario() {
             //Datos del formulario
@@ -232,30 +209,8 @@ export default {
         },
 
         //Eliminando un empleado
-        async deleteCourse() {
-            try {
-                //Tomo el curso enviado desde la tabla que se guarda en la variable global curso
-                let course = this.course;
-                //Ejecuto la eliminación en el servidor
-                const response = await this.$axios.delete(`/api/course/${course.id}`);
-                //Elimino de la tabla
-                this.courses = this.courses.filter(e => e.id !== course.id); // esto elimina la curso eliminada de la lista
-                //Cierro el dialog
-                this.dialog_delete = false;
-                //preparar mensaje
-                this.message = response.data.message;
-                this.color = 'success';
-                this.snackbar = true;
-            } catch (error) {
-                console.error('Error al eliminar curso:', error);
-                if (error.response && error.response.status == 422) {
-                    const validationErrors = error.response.data.errors;
-                    //preparar mensaje
-                    this.message = validationErrors;
-                    this.color = 'error';
-                    this.snackbar = true;
-                }
-            }
+        async deleteCourse(course) {
+            confirmation(course.name, `/api/course/${course.id}`, '/course');
         },
 
         //Activar y desactiva el loading

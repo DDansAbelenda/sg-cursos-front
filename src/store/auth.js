@@ -34,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
                 }
             ).catch(
                 (errors) => {
-                const res = errors.response.data.errors[0];
+                const res = errors.response.data.errors;
                 show_alert(res, 'error', ''); 
                 console.log(errors.response.data.errors);
                 }

@@ -54,7 +54,7 @@
               <v-btn class="edit" icon @click="openUpdateEmployee(item)" flat>
                 <v-icon color="blue darken-1">mdi-pencil</v-icon>
               </v-btn>
-              <v-btn class="delete" icon @click="openDialogDelete(item)" flat>
+              <v-btn class="delete" icon @click="deleteEmployee(item)" flat>
                 <v-icon color="red darken-1">mdi-delete</v-icon>
               </v-btn>
               <v-btn class="info" icon @click="openDialogDetail(item)" flat>
@@ -73,22 +73,6 @@
           </v-data-table>
         </v-col>
       </v-row>
-
-      <!--Dialog que pregunta si desea eliminar o no-->
-      <v-dialog v-model="dialog_delete" max-width="40rem" persistent>
-        <!-- Formulario para agregar empleado -->
-        <v-card>
-          <v-card-title>Aviso</v-card-title>
-          <v-card-text>
-            ¿Está seguro de que desea eliminar el empleado?
-          </v-card-text>
-          <v-card-actions>
-            <v-btn @click="deleteEmployee">Aceptar</v-btn>
-            <v-btn @click="cerrarDialogEliminar">Cancelar</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
       <!--Notificación que se muestra ante una acción-->
       <v-snackbar v-model="snackbar" :timeout="timeout" :color="color" top>
         {{ message }}
@@ -106,6 +90,7 @@ import LoadingPage from '../components/LoadingPage.vue'
 import EmployeeDetail from '../components/EmployeeDetail.vue'
 import axios from 'axios';
 import { useAuthStore } from '@/store/auth';
+import { confirmation } from '@/function';
 
 export default {
   name: 'EmployeeView',
@@ -125,8 +110,6 @@ export default {
       //Variable del dialog
       dialog: false,
       dialogTitle: '',
-      //Dialog delete
-      dialog_delete: false,
       //Datos del formulario   
       nameField: null,
       lastNameField: null,
@@ -207,13 +190,6 @@ export default {
       } catch (error) {
         console.error("Error al cargar el dialog", error)
       }
-    },
-    openDialogDelete(employee) {
-      this.dialog_delete = true;
-      this.employee = employee;
-    },
-    cerrarDialogEliminar() {
-      this.dialog_delete = false;
     },
     cerrarFormulario() {
       //Datos del formulario
@@ -323,30 +299,8 @@ export default {
     },
 
     //Eliminando un empleado
-    async deleteEmployee() {
-      try {
-        //Tomo el empleado enviado desde la tabla que se guarda en la variable global employee
-        let employee = this.employee;
-        //Ejecuto la eliminación en el servidor
-        const response = await this.$axios.delete(`/api/employee/${employee.id}`);
-        //Elimino de la tabla
-        this.employees = this.employees.filter(e => e.id !== employee.id); // esto elimina la empleado eliminada de la lista
-        //Cierro el dialog
-        this.dialog_delete = false;
-        //preparar mensaje
-        this.message = response.data.message;
-        this.color = 'success';
-        this.snackbar = true;
-      } catch (error) {
-        console.error('Error al eliminar empleado:', error);
-        if (error.response && error.response.status == 422) {
-          const validationErrors = error.response.data.errors;
-          //preparar mensaje
-          this.message = validationErrors;
-          this.color = 'error';
-          this.snackbar = true;
-        }
-      }
+    async deleteEmployee(employee) {
+      confirmation(employee.name, `/api/employee/${employee.id}`, '/employee');
     },
 
     //Controlar que el checkbox se seleccione por problemas con el v-model
