@@ -99,6 +99,7 @@
 import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
 import EditionDetail from '@/components/EditionDetail.vue';
+import { useAuthStore } from '@/store/auth';
 
 export default {
   name: 'EditionView',
@@ -231,7 +232,7 @@ export default {
           date: this.selectedDate,
           students: this.selectedStudents
         }
-        const response = await this.$axios.post('/edition', editionJson); // El segundo parámetro es un JSON que es el request
+        const response = await this.$axios.post('/api/edition', editionJson); // El segundo parámetro es un JSON que es el request
         this.editions.push(response.data.edition);
         this.cerrarFormulario();
         //preparar mensaje
@@ -263,7 +264,7 @@ export default {
           students: this.selectedStudents
         }
         console.log(this.dateFormat(this.selectedDate));
-        const response = await this.$axios.put(`/edition/${this.edition.id}`, editionJson);
+        const response = await this.$axios.put(`/api/edition/${this.edition.id}`, editionJson);
         //Poner el elemento devuelto en la lista desde el server en la lista
         let edition_response = response.data.edition;
         let editionIndex = this.editions.findIndex(e => e.id == edition_response.id);
@@ -292,7 +293,7 @@ export default {
         //Tomo el edition enviado desde la tabla que se guarda en la variable global edition
         let edition = this.edition;
         //Ejecuto la eliminación en el servidor
-        const response = await this.$axios.delete(`/edition/${edition.id}`);
+        const response = await this.$axios.delete(`/api/edition/${edition.id}`);
         //Elimino en la tabla
         this.editions = this.editions.filter(e => e.id !== edition.id); // esto elimina la edición eliminada de la lista
         //Cierro el dialog
@@ -338,16 +339,16 @@ export default {
       this.toggleLoading();
       try {
         //Cargar las ediciones
-        const response_editions = await this.$axios.get('/edition');
+        const response_editions = await this.$axios.get('/api/edition');
         this.editions = response_editions.data;
         //Cargar los cursos
-        const response_courses = await this.$axios.get('/course');
+        const response_courses = await this.$axios.get('/api/course');
         this.courses = response_courses.data;
         //Cargar los trabajadores para llenar la lista de estudiantes a elegir
-        const response_students = await this.$axios.get('/employee');
+        const response_students = await this.$axios.get('/api/employee');
         this.students = response_students.data;
         //Cargar los trabajadores que son posibles profesores
-        const response_professor = await this.$axios.get('/professor');
+        const response_professor = await this.$axios.get('/api/professor');
         this.professor = response_professor.data;
 
       } catch (error) {
@@ -382,6 +383,8 @@ export default {
     }
   },
   mounted() {
+    const authStore = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + authStore.authToken;
     this.fetchData();
   },
 };

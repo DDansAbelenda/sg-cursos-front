@@ -105,6 +105,8 @@ import moment from 'moment';
 import LoadingPage from '../components/LoadingPage.vue'
 import EmployeeDetail from '../components/EmployeeDetail.vue'
 import axios from 'axios';
+import { useAuthStore } from '@/store/auth';
+
 export default {
   name: 'EmployeeView',
   components: {
@@ -196,7 +198,7 @@ export default {
         // entiende el tipo Date() de js
         this.dateSelected = moment(employee.date_birth, 'DD/MM/YYYY').toDate();
         //Consultar si es professor en alguna edición
-        const response = await this.$axios.get(`/isprofessor/${employee.id}`);
+        const response = await this.$axios.get(`/api/isprofessor/${employee.id}`);
         this.isProfessor = response.data.isProfessor;
         this.employee = employee;
         //Activar el dialog
@@ -232,7 +234,7 @@ export default {
     async openDialogDetail(employee) {
       //Se llama a las referencias del componente y se activa sus metodos
       try {
-        const response = await this.$axios.get(`/employeeall/${employee.id}`);
+        const response = await this.$axios.get(`/api/employeeall/${employee.id}`);
         let employee_all = {
           'info': employee,
           'study_in': response.data.study_in,
@@ -262,7 +264,7 @@ export default {
           is_qualified: this.isQualified,
           date_birth: this.dateSelected,
         }
-        const response = await this.$axios.post('/employee', employee); // El segundo parámetro es un JSON que es el request
+        const response = await this.$axios.post('/api/employee', employee); // El segundo parámetro es un JSON que es el request
         this.employees.push(response.data.employee);
         this.cerrarFormulario();
         //preparar mensaje
@@ -296,7 +298,7 @@ export default {
           is_qualified: this.isQualified,
           date_birth: this.dateSelected,
         }
-        const response = await this.$axios.put(`/employee/${this.employee.id}`, employee_json);
+        const response = await this.$axios.put(`/api/employee/${this.employee.id}`, employee_json);
         //Poner el elemento devuelto en la lista desde el server en la lista
         let employee_response = response.data.employee;
         let employeeIndex = this.employees.findIndex(e => e.id == employee_response.id);
@@ -326,7 +328,7 @@ export default {
         //Tomo el empleado enviado desde la tabla que se guarda en la variable global employee
         let employee = this.employee;
         //Ejecuto la eliminación en el servidor
-        const response = await this.$axios.delete(`/employee/${employee.id}`);
+        const response = await this.$axios.delete(`/api/employee/${employee.id}`);
         //Elimino de la tabla
         this.employees = this.employees.filter(e => e.id !== employee.id); // esto elimina la empleado eliminada de la lista
         //Cierro el dialog
@@ -361,13 +363,13 @@ export default {
     fetchData() {
 
       this.toggleLoading();
-      
+
       async function fetchEmployeeData(url) {
         const response = axios.get(url);
         return response;
       }
-      
-      fetchEmployeeData('/employee').then(
+
+      fetchEmployeeData('/api/employee').then(
         (response) => {
           this.employees = response.data;
           this.toggleLoading();
@@ -380,8 +382,9 @@ export default {
     }
   },
   mounted() {
+    const authStore = useAuthStore();
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + authStore.authToken;
     this.fetchData();
-
   },
 };
 </script>

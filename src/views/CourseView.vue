@@ -78,6 +78,7 @@
   
 <script>
 import LoadingPage from '../components/LoadingPage.vue'
+import { useAuthStore } from '@/store/auth';
 
 export default {
     name: 'CourseView',
@@ -104,7 +105,7 @@ export default {
             numerHoursField: null,
             costField: null,
             //Datos de las tablas
-            courses: [], 
+            courses: [],
             headers: [
                 { title: 'Nombre', key: 'name' },
                 { title: 'Descripción', value: 'description' },
@@ -180,7 +181,7 @@ export default {
                     number_hours: this.numerHoursField,
                     cost: this.costField,
                 }
-                const response = await this.$axios.post('/course', course); // El segundo parámetro es un JSON que es el request
+                const response = await this.$axios.post('/api/course', course); // El segundo parámetro es un JSON que es el request
                 this.courses.push(response.data.course);
                 this.cerrarFormulario();
                 //preparar mensaje
@@ -208,7 +209,7 @@ export default {
                     number_hours: this.numerHoursField,
                     cost: this.costField,
                 }
-                const response = await this.$axios.put(`/course/${this.course.id}`, course_json);
+                const response = await this.$axios.put(`/api/course/${this.course.id}`, course_json);
                 //Poner el elemento devuelto en la lista desde el server en la lista
                 let course_response = response.data.course;
                 let courseIndex = this.courses.findIndex(e => e.id == course_response.id);
@@ -236,7 +237,7 @@ export default {
                 //Tomo el curso enviado desde la tabla que se guarda en la variable global curso
                 let course = this.course;
                 //Ejecuto la eliminación en el servidor
-                const response = await this.$axios.delete(`/course/${course.id}`);
+                const response = await this.$axios.delete(`/api/course/${course.id}`);
                 //Elimino de la tabla
                 this.courses = this.courses.filter(e => e.id !== course.id); // esto elimina la curso eliminada de la lista
                 //Cierro el dialog
@@ -265,7 +266,7 @@ export default {
         async fetchData() {
             this.toggleLoading();
             try {
-                const response = await this.$axios.get('/course');
+                const response = await this.$axios.get('/api/course');
                 this.courses = response.data;
             } catch (error) {
                 console.error('Error al obtener cursos:', error);
@@ -275,6 +276,8 @@ export default {
         }
     },
     mounted() {
+        const authStore = useAuthStore();
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + authStore.authToken;
         this.fetchData();
     },
 };
@@ -294,4 +297,3 @@ export default {
     font-size: 1.2rem;
 }
 </style>
-  

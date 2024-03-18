@@ -169,6 +169,11 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.23.3.tgz#0ce0be31a4ca4f1884b5786057cadcb6c3be58f9"
   integrity sha512-uVsWNvlVsIninV2prNz/3lHCb+5CJ+e+IUBfbjToAHODtfGYLfCFuY4AU7TskI+dAKk+njsPiBjq1gKTvZOBaw==
 
+"@babel/parser@^7.23.9":
+  version "7.24.0"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@babel/parser/-/parser-7.24.0.tgz#26a3d1ff49031c53a97d03b604375f028746a9ac"
+  integrity sha512-QuP/FxEAzMSjXygs8v4N9dvdXzEHN4W1oF3PxuWAtPo08UdM17u89RDMgjLn/mlc56iM0HlLmVkO/wgR+rDgHg==
+
 "@babel/plugin-syntax-async-generators@^7.8.4":
   version "7.8.4"
   resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-async-generators/-/plugin-syntax-async-generators-7.8.4.tgz#a983fb1aeb2ec3f6ed042a210f640e90e786fe0d"
@@ -325,10 +330,10 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
-"@fortawesome/fontawesome-free@^6.4.2":
-  version "6.4.2"
-  resolved "https://nexus.uclv.edu.cu/repository/npm/@fortawesome/fontawesome-free/-/fontawesome-free-6.4.2.tgz#36b6a9cb5ffbecdf89815c94d0c0ffa489ac5ecb"
-  integrity sha512-m5cPn3e2+FDCOgi1mz0RexTUvvQibBebOUlUlW0+YrMjDTPkiJ6VTKukA1GRsvRw+12KyJndNjj0O4AgTxm2Pg==
+"@fortawesome/fontawesome-free@^6.5.1":
+  version "6.5.1"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@fortawesome/fontawesome-free/-/fontawesome-free-6.5.1.tgz#55cc8410abf1003b726324661ce5b0d1c10de258"
+  integrity sha512-CNy5vSwN3fsUStPRLX7fUYojyuzoEMSXPl7zSLJ8TgtRfjv24LOnOWKT2zYwaHZCJGkdyRnTmstR0P+Ah503Gw==
 
 "@hapi/hoek@^9.0.0":
   version "9.3.0"
@@ -624,6 +629,11 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@kurkle/color@^0.3.0":
+  version "0.3.2"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@kurkle/color/-/color-0.3.2.tgz#5acd38242e8bde4f9986e7913c8fdf49d3aa199f"
+  integrity sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==
 
 "@leichtgewicht/ip-codec@^2.0.1":
   version "2.0.4"
@@ -1157,6 +1167,17 @@
     estree-walker "^2.0.2"
     source-map-js "^1.0.2"
 
+"@vue/compiler-core@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/compiler-core/-/compiler-core-3.4.21.tgz#868b7085378fc24e58c9aed14c8d62110a62be1a"
+  integrity sha512-MjXawxZf2SbZszLPYxaFCjxfibYrzr3eYbKxwpLR9EQN+oaziSu3qKVbwBERj1IFIB8OLUewxB5m/BFzi613og==
+  dependencies:
+    "@babel/parser" "^7.23.9"
+    "@vue/shared" "3.4.21"
+    entities "^4.5.0"
+    estree-walker "^2.0.2"
+    source-map-js "^1.0.2"
+
 "@vue/compiler-dom@3.3.8":
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.3.8.tgz#09d832514b9b8d9415a3816b065d69dbefcc7e9b"
@@ -1164,6 +1185,14 @@
   dependencies:
     "@vue/compiler-core" "3.3.8"
     "@vue/shared" "3.3.8"
+
+"@vue/compiler-dom@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/compiler-dom/-/compiler-dom-3.4.21.tgz#0077c355e2008207283a5a87d510330d22546803"
+  integrity sha512-IZC6FKowtT1sl0CR5DpXSiEB5ayw75oT2bma1BEhV7RRR1+cfwLrxc2Z8Zq/RGFzJ8w5r9QtCOvTjQgdn0IKmA==
+  dependencies:
+    "@vue/compiler-core" "3.4.21"
+    "@vue/shared" "3.4.21"
 
 "@vue/compiler-sfc@3.3.8":
   version "3.3.8"
@@ -1181,6 +1210,21 @@
     postcss "^8.4.31"
     source-map-js "^1.0.2"
 
+"@vue/compiler-sfc@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/compiler-sfc/-/compiler-sfc-3.4.21.tgz#4af920dc31ab99e1ff5d152b5fe0ad12181145b2"
+  integrity sha512-me7epoTxYlY+2CUM7hy9PCDdpMPfIwrOvAXud2Upk10g4YLv9UBW7kL798TvMeDhPthkZ0CONNrK2GoeI1ODiQ==
+  dependencies:
+    "@babel/parser" "^7.23.9"
+    "@vue/compiler-core" "3.4.21"
+    "@vue/compiler-dom" "3.4.21"
+    "@vue/compiler-ssr" "3.4.21"
+    "@vue/shared" "3.4.21"
+    estree-walker "^2.0.2"
+    magic-string "^0.30.7"
+    postcss "^8.4.35"
+    source-map-js "^1.0.2"
+
 "@vue/compiler-ssr@3.3.8":
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/@vue/compiler-ssr/-/compiler-ssr-3.3.8.tgz#136eed54411e4694815d961048a237191063fbce"
@@ -1188,6 +1232,14 @@
   dependencies:
     "@vue/compiler-dom" "3.3.8"
     "@vue/shared" "3.3.8"
+
+"@vue/compiler-ssr@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/compiler-ssr/-/compiler-ssr-3.4.21.tgz#b84ae64fb9c265df21fc67f7624587673d324fef"
+  integrity sha512-M5+9nI2lPpAsgXOGQobnIueVqc9sisBFexh5yMIMRAPYLa7+5wEJs8iqOZc1WAa9WQbx9GR2twgznU8LTIiZ4Q==
+  dependencies:
+    "@vue/compiler-dom" "3.4.21"
+    "@vue/shared" "3.4.21"
 
 "@vue/component-compiler-utils@^3.1.0", "@vue/component-compiler-utils@^3.3.0":
   version "3.3.0"
@@ -1228,6 +1280,13 @@
   dependencies:
     "@vue/shared" "3.3.8"
 
+"@vue/reactivity@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/reactivity/-/reactivity-3.4.21.tgz#affd3415115b8ebf4927c8d2a0d6a24bccfa9f02"
+  integrity sha512-UhenImdc0L0/4ahGCyEzc/pZNwVgcglGy9HVzJ1Bq2Mm9qXOpP8RyNTjookw/gOCUlXSEtuZ2fUg5nrHcoqJcw==
+  dependencies:
+    "@vue/shared" "3.4.21"
+
 "@vue/runtime-core@3.3.8":
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.3.8.tgz#fba5a632cbf2b5d29e171489570149cb6975dcdb"
@@ -1235,6 +1294,14 @@
   dependencies:
     "@vue/reactivity" "3.3.8"
     "@vue/shared" "3.3.8"
+
+"@vue/runtime-core@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/runtime-core/-/runtime-core-3.4.21.tgz#3749c3f024a64c4c27ecd75aea4ca35634db0062"
+  integrity sha512-pQthsuYzE1XcGZznTKn73G0s14eCJcjaLvp3/DKeYWoFacD9glJoqlNBxt3W2c5S40t6CCcpPf+jG01N3ULyrA==
+  dependencies:
+    "@vue/reactivity" "3.4.21"
+    "@vue/shared" "3.4.21"
 
 "@vue/runtime-dom@3.3.8":
   version "3.3.8"
@@ -1245,6 +1312,15 @@
     "@vue/shared" "3.3.8"
     csstype "^3.1.2"
 
+"@vue/runtime-dom@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/runtime-dom/-/runtime-dom-3.4.21.tgz#91f867ef64eff232cac45095ab28ebc93ac74588"
+  integrity sha512-gvf+C9cFpevsQxbkRBS1NpU8CqxKw0ebqMvLwcGQrNpx6gqRDodqKqA+A2VZZpQ9RpK2f9yfg8VbW/EpdFUOJw==
+  dependencies:
+    "@vue/runtime-core" "3.4.21"
+    "@vue/shared" "3.4.21"
+    csstype "^3.1.3"
+
 "@vue/server-renderer@3.3.8":
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/@vue/server-renderer/-/server-renderer-3.3.8.tgz#9b1779010e75783edeed8fcfb97d9c95fc3ac5d2"
@@ -1253,10 +1329,23 @@
     "@vue/compiler-ssr" "3.3.8"
     "@vue/shared" "3.3.8"
 
+"@vue/server-renderer@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/server-renderer/-/server-renderer-3.4.21.tgz#150751579d26661ee3ed26a28604667fa4222a97"
+  integrity sha512-aV1gXyKSN6Rz+6kZ6kr5+Ll14YzmIbeuWe7ryJl5muJ4uwSwY/aStXTixx76TwkZFJLm1aAlA/HSWEJ4EyiMkg==
+  dependencies:
+    "@vue/compiler-ssr" "3.4.21"
+    "@vue/shared" "3.4.21"
+
 "@vue/shared@3.3.8":
   version "3.3.8"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.3.8.tgz#f044942142e1d3a395f24132e6203a784838542d"
   integrity sha512-8PGwybFwM4x8pcfgqEQFy70NaQxASvOC5DJwLQfpArw1UDfUXrJkdxD3BhVTMS+0Lef/TU7YO0Jvr0jJY8T+mw==
+
+"@vue/shared@3.4.21":
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/shared/-/shared-3.4.21.tgz#de526a9059d0a599f0b429af7037cd0c3ed7d5a1"
+  integrity sha512-PuJe7vDIi6VYSinuEbUIQgMIRZGgM8e4R+G+/dQTk0X1NEdvgvvgv7m+rfmDH1gZzyA1OjjoWskvHlfRNfQf3g==
 
 "@vue/test-utils@^2.0.0-0":
   version "2.4.2"
@@ -1265,6 +1354,14 @@
   dependencies:
     js-beautify "^1.14.9"
     vue-component-type-helpers "^1.8.21"
+
+"@vue/test-utils@^2.0.0-rc.17":
+  version "2.4.5"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/@vue/test-utils/-/test-utils-2.4.5.tgz#010aa4debe6602d83dc75f233b397092742105a2"
+  integrity sha512-oo2u7vktOyKUked36R93NB7mg2B+N7Plr8lxp2JBGwr18ch6EggFjixSCdIVVLkT6Qr0z359Xvnafc9dcKyDUg==
+  dependencies:
+    js-beautify "^1.14.9"
+    vue-component-type-helpers "^2.0.0"
 
 "@vue/vue-loader-v15@npm:vue-loader@^15.9.7":
   version "15.11.1"
@@ -1737,11 +1834,6 @@ batch@0.6.1:
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
   integrity sha512-x+VAiMRL6UPkx+kudNvxTl6hB2XNNCG2r+7wixVfIYwu/2HKRXimwQyaumLjMveWvT2Hkd/cAJw+QBMfJ/EKVw==
 
-bezier-easing@2.1.0:
-  version "2.1.0"
-  resolved "https://nexus.uclv.edu.cu/repository/npm/bezier-easing/-/bezier-easing-2.1.0.tgz#c04dfe8b926d6ecaca1813d69ff179b7c2025d86"
-  integrity sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==
-
 big.js@^5.2.2:
   version "5.2.2"
   resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
@@ -1952,6 +2044,13 @@ char-regex@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-2.0.1.tgz#6dafdb25f9d3349914079f010ba8d0e6ff9cd01e"
   integrity sha512-oSvEeo6ZUD7NepqAat3RqoucZ5SeqLJgOvVIwkafu6IP3V0pO38s/ypdVUmDDK6qIIHNlYHJAKX9E7R7HoKElw==
+
+chart.js@^4.4.2:
+  version "4.4.2"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/chart.js/-/chart.js-4.4.2.tgz#95962fa6430828ed325a480cc2d5f2b4e385ac31"
+  integrity sha512-6GD7iKwFpP5kbSD4MeRRRlTnQvxfQREy36uEtm1hzHzcOqwWx0YEHuspuoNlslu+nciLIB7fjjsHkUv/FzFcOg==
+  dependencies:
+    "@kurkle/color" "^0.3.0"
 
 chokidar@^3.5.3:
   version "3.5.3"
@@ -2404,6 +2503,11 @@ csstype@^3.1.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
 
+csstype@^3.1.3:
+  version "3.1.3"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
+  integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
+
 data-urls@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/data-urls/-/data-urls-2.0.0.tgz#156485a72963a970f5d5821aaf642bef2bf2db9b"
@@ -2687,6 +2791,11 @@ entities@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/entities/-/entities-2.2.0.tgz#098dc90ebb83d8dffa089d55256b351d34c4da55"
   integrity sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==
+
+entities@^4.5.0:
+  version "4.5.0"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/entities/-/entities-4.5.0.tgz#5d268ea5e7113ec74c4d033b79ea5a35a488fb48"
+  integrity sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==
 
 error-ex@^1.3.1:
   version "1.3.2"
@@ -4401,6 +4510,13 @@ magic-string@^0.30.5:
   dependencies:
     "@jridgewell/sourcemap-codec" "^1.4.15"
 
+magic-string@^0.30.7:
+  version "0.30.8"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/magic-string/-/magic-string-0.30.8.tgz#14e8624246d2bedba70d5462aa99ac9681844613"
+  integrity sha512-ISQTe55T2ao7XtlAStud6qwYPZjE4GK1S/BeVPus4jrq6JuOnQ00YKQC581RWhR122W7msZV263KzVeLoqidyQ==
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.4.15"
+
 make-dir@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-4.0.0.tgz#c3c2307a771277cd9638305f915c29ae741b614e"
@@ -4603,7 +4719,7 @@ mz@^2.4.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nanoid@^3.3.6:
+nanoid@^3.3.6, nanoid@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
   integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
@@ -4938,6 +5054,19 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
+pinia-plugin-persistedstate@^3.2.1:
+  version "3.2.1"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/pinia-plugin-persistedstate/-/pinia-plugin-persistedstate-3.2.1.tgz#66780602aecd6c7b152dd7e3ddc249a1f7a13fe5"
+  integrity sha512-MK++8LRUsGF7r45PjBFES82ISnPzyO6IZx3CH5vyPseFLZCk1g2kgx6l/nW8pEBKxxd4do0P6bJw+mUSZIEZUQ==
+
+pinia@^2.1.7:
+  version "2.1.7"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/pinia/-/pinia-2.1.7.tgz#4cf5420d9324ca00b7b4984d3fbf693222115bbc"
+  integrity sha512-+C2AHFtcFqjPih0zpYuvof37SFxMQ7OEG2zV9jRI12i9BOy3YQVAHwdKtyyc8pDcDyIc33WCIsZaCFWU7WWxGQ==
+  dependencies:
+    "@vue/devtools-api" "^6.5.0"
+    vue-demi ">=0.14.5"
+
 pirates@^4.0.4:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/pirates/-/pirates-4.0.6.tgz#3018ae32ecfcff6c29ba2267cbf21166ac1f36b9"
@@ -5220,6 +5349,15 @@ postcss@^8.2.6, postcss@^8.3.5, postcss@^8.4.21, postcss@^8.4.31:
   integrity sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==
   dependencies:
     nanoid "^3.3.6"
+    picocolors "^1.0.0"
+    source-map-js "^1.0.2"
+
+postcss@^8.4.35:
+  version "8.4.35"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/postcss/-/postcss-8.4.35.tgz#60997775689ce09011edf083a549cea44aabe2f7"
+  integrity sha512-u5U8qYpBCpN13BsiEB0CbR1Hhh4Gc0zLFuedrHJKMctHCHAGrMdG0PRM/KErzAL3CU6/eckEtmHNB3x6e3c0vA==
+  dependencies:
+    nanoid "^3.3.7"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
@@ -6032,6 +6170,11 @@ svgo@^2.7.0:
     picocolors "^1.0.0"
     stable "^0.1.8"
 
+sweetalert2@^11.10.6:
+  version "11.10.6"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/sweetalert2/-/sweetalert2-11.10.6.tgz#77c55271f786e62ea6710b84893a98c27319b3c9"
+  integrity sha512-CINZPLZXZRSZqSOE7H7j1F7X8e8O1kLOiXPmtJn1DYxvXsKBr3d16d90+IcwTTs7dJww20h8r8QIxIwsLGX+6A==
+
 symbol-tree@^3.2.4:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.4.tgz#430637d248ba77e078883951fb9aa0eed7c63fa2"
@@ -6299,10 +6442,25 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
+vue-chartjs@^5.3.0:
+  version "5.3.0"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/vue-chartjs/-/vue-chartjs-5.3.0.tgz#59920a07d72f37a2375d495256e486b92813bf6e"
+  integrity sha512-8XqX0JU8vFZ+WA2/knz4z3ThClduni2Nm0BMe2u0mXgTfd9pXrmJ07QBI+WAij5P/aPmPMX54HCE1seWL37ZdQ==
+
 vue-component-type-helpers@^1.8.21:
   version "1.8.22"
   resolved "https://registry.yarnpkg.com/vue-component-type-helpers/-/vue-component-type-helpers-1.8.22.tgz#24c1f324885e5652c7bcc5d9cbd76800b0af3809"
   integrity sha512-LK3wJHs3vJxHG292C8cnsRusgyC5SEZDCzDCD01mdE/AoREFMl2tzLRuzwyuEsOIz13tqgBcnvysN3Lxsa14Fw==
+
+vue-component-type-helpers@^2.0.0:
+  version "2.0.6"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/vue-component-type-helpers/-/vue-component-type-helpers-2.0.6.tgz#41737970f70841bc1b82391afa364da0f4ee2d76"
+  integrity sha512-qdGXCtoBrwqk1BT6r2+1Wcvl583ZVkuSZ3or7Y1O2w5AvWtlvvxwjGhmz5DdPJS9xqRdDlgTJ/38ehWnEi0tFA==
+
+vue-demi@>=0.14.5:
+  version "0.14.7"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/vue-demi/-/vue-demi-0.14.7.tgz#8317536b3ef74c5b09f268f7782e70194567d8f2"
+  integrity sha512-EOG8KXDQNwkJILkx/gPcoL/7vH+hORoBaKgGe+6W7VFMvCYJfmF2dGbvgDroVnI8LU7/kTu8mbjRZGBU1z9NTA==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
@@ -6324,13 +6482,6 @@ vue-router@^4.0.3:
   integrity sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
-
-vue-scrollto@^2.20.0:
-  version "2.20.0"
-  resolved "https://nexus.uclv.edu.cu/repository/npm/vue-scrollto/-/vue-scrollto-2.20.0.tgz#3ba52239a62710c97003d12d4393f1f3393cd5cc"
-  integrity sha512-7i+AGKJTThZnMEkhIPgrZjyAX+fXV7/rGdg+CV283uZZwCxwiMXaBLTmIc5RTA4uwGnT+E6eJle3mXQfM2OD3A==
-  dependencies:
-    bezier-easing "2.1.0"
 
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.3:
   version "4.1.3"
@@ -6355,6 +6506,25 @@ vue@^3.2.13:
     "@vue/runtime-dom" "3.3.8"
     "@vue/server-renderer" "3.3.8"
     "@vue/shared" "3.3.8"
+
+vue@^3.2.25:
+  version "3.4.21"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/vue/-/vue-3.4.21.tgz#69ec30e267d358ee3a0ce16612ba89e00aaeb731"
+  integrity sha512-5hjyV/jLEIKD/jYl4cavMcnzKwjMKohureP8ejn3hhEjwhWIhWeuzL2kJAjzl/WyVsgPY56Sy4Z40C3lVshxXA==
+  dependencies:
+    "@vue/compiler-dom" "3.4.21"
+    "@vue/compiler-sfc" "3.4.21"
+    "@vue/runtime-dom" "3.4.21"
+    "@vue/server-renderer" "3.4.21"
+    "@vue/shared" "3.4.21"
+
+vuejs-paginate-next@^1.0.2:
+  version "1.0.2"
+  resolved "https://nexus.uclv.edu.cu/repository/npm/vuejs-paginate-next/-/vuejs-paginate-next-1.0.2.tgz#fdebe6467f4a336067dc75ea72afb7057092c1bf"
+  integrity sha512-Dal1HXWuYrbvQ47NkagXIYAcEDnnWM3P8Nykf5a4oHc9PcM5BzlU1Z1NOSXAkjENI3WNoS+WhkpCsBhG9Bptgg==
+  dependencies:
+    "@vue/test-utils" "^2.0.0-rc.17"
+    vue "^3.2.25"
 
 vuetify@^3.4.0-beta.1:
   version "3.4.0-beta.1"
