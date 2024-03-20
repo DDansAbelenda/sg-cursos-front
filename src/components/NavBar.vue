@@ -14,7 +14,8 @@
                 <v-btn to="/about">About Us</v-btn>
             </div>
             <v-toolbar-title class="title">Sistema de Gestión de Cursos</v-toolbar-title>
-            <v-btn class="bg-green-darken-4" v-if="authStore.user" @click="authStore.logout">LOGOUT</v-btn>
+            <v-btn class="bg-green-darken-4" v-if="authStore.user" @click="authStore.logout"
+                prepend-icon="mdi-logout">LOGOUT</v-btn>
         </v-app-bar>
 
         <!--Menu lateral-->
@@ -27,8 +28,7 @@
                 <v-list-item to="/course" prepend-icon="mdi-school" title="Cursos" value="course"></v-list-item>
                 <v-list-item to="/edition" prepend-icon="mdi-calendar-account-outline" title="Ediciones"
                     value="edition"></v-list-item>
-                <v-list-item to="/register" prepend-icon="mdi-account" title="Usuarios"
-                    value="users"></v-list-item>
+                <v-list-item to="/register" prepend-icon="mdi-account" title="Usuarios" value="users"></v-list-item>
                 <v-list-item to="/about" prepend-icon="mdi-information-variant" title="About Us"
                     value="about"></v-list-item>
             </v-list>
