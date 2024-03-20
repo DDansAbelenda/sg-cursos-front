@@ -58,7 +58,7 @@ export default {
 }
 
 .principal {
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(211, 211, 211);
   width: 100%;
 
 }
