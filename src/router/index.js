@@ -51,7 +51,7 @@ const router = createRouter({
 /*Controlar que si el usuario no ha realizado login no puede entrar
 a ninguna otra ruta*/
 router.beforeEach(async (to) => {
-  const publicPages = ['/login', '/register'];
+  const publicPages = ['/login'];
   const authRequired = !publicPages.includes(to.path);
   const auth = useAuthStore();
   if (authRequired && !auth.user && !sessionStorage.getItem('TOKEN')) {
