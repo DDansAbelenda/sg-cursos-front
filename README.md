@@ -22,6 +22,7 @@ git clone https://github.com/DDansAbelenda/sg-cursos-front.git
 ```
 yarn install
 ```
+Nota: En caso de conflicto entre dependencias ir al apartado **Resolver conflictos de Node**
 
 ## Configuración
 
@@ -65,3 +66,33 @@ yarn test:unit
 ## Contribuciones
 
 ¡Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, por favor abre un problema o envía una solicitud de extracción.
+
+---
+
+## Resolver conflictos de Node
+
+Si al instalar las dependencias del proyecto surgen advertencias de posible comportamiento inapropiado, podemos estar en presencia de conflictos entre las dependencias que intentan instalar varios paquetes que proporcionan funcionalidades similares en el mismo directorio de destino.
+
+Para resolver este problema, puedes intentar lo siguiente:
+
+1. **Limpiar la caché de Yarn**: A veces, la caché de Yarn puede causar problemas. Puedes intentar limpiarla ejecutando el siguiente comando:
+   ```
+   yarn cache clean
+   ```
+
+2. **Actualizar Yarn y Node.js**: Asegúrate de tener la última versión de Yarn y Node.js instalada en tu sistema. Puedes actualizar Yarn ejecutando:
+   ```
+   npm install -g yarn
+   ```
+   Y puedes actualizar Node.js descargando la última versión desde el sitio web oficial.
+
+3. **Eliminar el directorio `node_modules` y el archivo `yarn.lock`**: A veces, eliminar el directorio `node_modules` y el archivo `yarn.lock` y luego volver a instalar las dependencias puede resolver problemas de instalación. Ejecuta los siguientes comandos:
+   ```
+   rm -rf node_modules
+   rm yarn.lock
+   yarn install
+   ```
+
+4. **Revisar las dependencias del proyecto**: Verifica las dependencias de tu proyecto y asegúrate de que no haya conflictos entre ellas. Puedes revisar el archivo `package.json` y eliminar o actualizar las dependencias que estén causando conflictos.
+
+Si ninguno de estos pasos resuelve el problema, puede ser útil buscar en línea el error específico que estás experimentando o consultar la documentación oficial de Yarn para obtener más información sobre cómo resolver problemas de instalación de dependencias.
