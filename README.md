@@ -22,7 +22,9 @@ git clone https://github.com/DDansAbelenda/sg-cursos-front.git
 ```
 yarn install
 ```
-Nota: En caso de conflicto entre dependencias ir al apartado: **Resolver conflictos de Node**
+Notas:
+1. En caso de no tener instalado yarn puede hacerlo utilizando el comando: `npm install -g yarn`.
+2. En caso de conflicto entre dependencias ir al apartado: **Resolver conflictos de Node**
 
 ## Configuración
 
