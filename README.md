@@ -38,7 +38,7 @@ Para compilar y ejecutar la aplicación en modo de desarrollo con recarga en cal
 yarn serve
 ```
 
-La aplicación estará disponible en `http://localhost:8080` por defecto.
+La aplicación estará disponible en `http://localhost:8080` por defecto. En caso contrario se debe configurar en la api, en el fichero .env la variable `SANCTUM_STATEFUL_DOMAINS=localhost:<Puerto>` Donde `<Puerto>` será el puerto donde esté diponible la aplicación.
 
 ### Compilación para producción
 
