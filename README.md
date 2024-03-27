@@ -22,7 +22,7 @@ git clone https://github.com/DDansAbelenda/sg-cursos-front.git
 ```
 yarn install
 ```
-Nota: En caso de conflicto entre dependencias ir al apartado **Resolver conflictos de Node**
+Nota: En caso de conflicto entre dependencias ir al apartado: **Resolver conflictos de Node**
 
 ## Configuración
 
@@ -69,7 +69,9 @@ yarn test:unit
 
 ---
 
-## Resolver conflictos de Node
+## Errores durante la configuración
+
+### Resolver conflictos entre dependencias
 
 Si al instalar las dependencias del proyecto surgen advertencias de posible comportamiento inapropiado, podemos estar en presencia de conflictos entre las dependencias que intentan instalar varios paquetes que proporcionan funcionalidades similares en el mismo directorio de destino.
 
@@ -84,7 +86,7 @@ Para resolver este problema, puedes intentar lo siguiente:
    ```
    npm install -g yarn
    ```
-   Y puedes actualizar Node.js descargando la última versión desde el sitio web oficial.
+   Y puedes actualizar Node.js descargando la última versión desde el sitio web oficial. En caso de problemas con la conexión o errores al descargar ver el apartado: **Problema al instalar dependencias con npm**
 
 3. **Eliminar el directorio `node_modules` y el archivo `yarn.lock`**: A veces, eliminar el directorio `node_modules` y el archivo `yarn.lock` y luego volver a instalar las dependencias puede resolver problemas de instalación. Ejecuta los siguientes comandos:
    ```
@@ -96,3 +98,11 @@ Para resolver este problema, puedes intentar lo siguiente:
 4. **Revisar las dependencias del proyecto**: Verifica las dependencias de tu proyecto y asegúrate de que no haya conflictos entre ellas. Puedes revisar el archivo `package.json` y eliminar o actualizar las dependencias que estén causando conflictos.
 
 Si ninguno de estos pasos resuelve el problema, puede ser útil buscar en línea el error específico que estás experimentando o consultar la documentación oficial de Yarn para obtener más información sobre cómo resolver problemas de instalación de dependencias.
+
+
+### Problema al instalar dependencias con npm
+
+En el caso de que demore la instalación de las dependencias o de error de conexión, para el caso de usuarios cubanos se puede utilizar el repositorio  npm de la UCLV configurando en las variables de npm con el siguiente comando:
+
+`npm set registry https://nexus.uclv.edu.cu/repository/npm/`
+
